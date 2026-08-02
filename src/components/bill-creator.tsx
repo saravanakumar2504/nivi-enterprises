@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { completeSale } from "@/lib/features/shop/shopActions";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { selectProducts } from "@/lib/selectors/dashboard";
+import { useAppDispatch } from "@/lib/hooks";
+import type { Product } from "@/lib/types";
 
 const sampleCart = [
   { productId: "prd-101", quantity: 1 },
@@ -13,7 +13,13 @@ const sampleCart = [
 
 export function BillCreator() {
   const dispatch = useAppDispatch();
-  const products = useAppSelector(selectProducts);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((res) => res.json() as Promise<Product[]>)
+      .then(setProducts);
+  }, []);
 
   const selectedItems = useMemo(
     () =>

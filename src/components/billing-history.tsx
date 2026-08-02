@@ -1,10 +1,17 @@
 "use client";
 
-import { selectInvoices } from "@/lib/selectors/dashboard";
-import { useAppSelector } from "@/lib/hooks";
+import { useEffect, useState } from "react";
+
+import type { Invoice } from "@/lib/types";
 
 export function BillingHistory() {
-  const invoices = useAppSelector(selectInvoices);
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
+
+  useEffect(() => {
+    fetch("/api/invoices")
+      .then((res) => res.json() as Promise<Invoice[]>)
+      .then(setInvoices);
+  }, []);
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-12 sm:px-10 lg:px-16">

@@ -2,10 +2,12 @@ export type Product = {
   id: string;
   name: string;
   brand: string;
-  size: string;
+  modelNumber?: string;
   category: string;
-  quantity: number;
+  size: string;
+  unit: string;
   rate: number;
+  quantity: number;
   reorderLevel: number;
 };
 

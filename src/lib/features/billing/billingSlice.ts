@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { completeSale } from "@/lib/features/shop/shopActions";
-import { initialInvoices } from "@/lib/mock-data";
 import type { Invoice } from "@/lib/types";
 
 type BillingState = {
@@ -9,7 +8,7 @@ type BillingState = {
 };
 
 const initialState: BillingState = {
-  invoices: initialInvoices,
+  invoices: [],
 };
 
 const billingSlice = createSlice({

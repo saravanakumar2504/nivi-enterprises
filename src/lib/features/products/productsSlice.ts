@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { initialProducts } from "@/lib/mock-data";
 import { completeSale } from "@/lib/features/shop/shopActions";
 import type { Product } from "@/lib/types";
 
@@ -9,7 +8,7 @@ type ProductsState = {
 };
 
 const initialState: ProductsState = {
-  items: initialProducts,
+  items: [],
 };
 
 const productsSlice = createSlice({
