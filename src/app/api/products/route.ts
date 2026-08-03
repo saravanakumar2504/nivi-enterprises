@@ -10,12 +10,42 @@ type ProductInput = Omit<Product, "id" | "quantity" | "reorderLevel"> & {
   reorderLevel?: number;
 };
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get("query")?.trim() ?? "";
+    const limitParam = Number(searchParams.get("limit") ?? "20");
+    const limit = Number.isFinite(limitParam)
+      ? Math.max(1, Math.min(50, Math.trunc(limitParam)))
+      : 20;
+
     const client = await clientPromise;
-    const docs = await client.db(DB_NAME).collection("products")
-      .find({}, { projection: { _id: 0 } })
-      .toArray();
+    const collection = client.db(DB_NAME).collection("products");
+
+    const escapeForRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
+    const contains = (s: string) => new RegExp(escapeForRegex(s), "i");
+
+    const filter = query
+      ? {
+          $or: [
+            { name: contains(query) },
+            { brand: contains(query) },
+            { size: contains(query) },
+            { modelNumber: contains(query) },
+            { category: contains(query) },
+          ],
+        }
+      : {};
+
+    let cursor = collection
+      .find(filter, { projection: { _id: 0 } })
+      .sort({ name: 1 });
+
+    if (query) {
+      cursor = cursor.limit(limit);
+    }
+
+    const docs = await cursor.toArray();
     return NextResponse.json(docs);
   } catch {
     return NextResponse.json(

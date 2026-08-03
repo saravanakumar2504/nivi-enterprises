@@ -25,3 +25,13 @@ export type Invoice = {
   items: InvoiceLine[];
   total: number;
 };
+
+export type CreateInvoiceLineInput = {
+  productId: string;
+  quantity: number;
+};
+
+export type CreateInvoiceInput = {
+  customerName: string;
+  items: CreateInvoiceLineInput[];
+};
