@@ -140,11 +140,11 @@ export function ProductForm({ mode, productId }: Readonly<ProductFormProps>) {
       )}
       <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12 sm:px-10 lg:px-16">
       {loadError && (
-        <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-2xl border-2 border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {loadError}
         </div>
       )}
-      <section className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
+      <section className="rounded-3xl border-2 border-black/10 bg-white p-8 shadow-sm">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
           Products
         </p>
@@ -167,8 +167,8 @@ export function ProductForm({ mode, productId }: Readonly<ProductFormProps>) {
                   <select
                     name={field.name}
                     defaultValue={field.defaultValue}
-                    className={`rounded-2xl border px-4 py-3 text-zinc-950 outline-none transition focus:border-orange-400 bg-white ${
-                      fieldErrors[field.name] ? "border-red-400" : "border-black/10"
+                    className={`rounded-2xl border-2 px-4 py-3 text-zinc-950 outline-none transition focus:border-orange-400 bg-white ${
+                      fieldErrors[field.name] ? "border-red-500" : "border-black/10"
                     }`}
                   >
                     <option value="">Select unit</option>
@@ -182,8 +182,8 @@ export function ProductForm({ mode, productId }: Readonly<ProductFormProps>) {
                     name={field.name}
                     defaultValue={field.defaultValue}
                     placeholder={field.label}
-                    className={`rounded-2xl border px-4 py-3 text-zinc-950 outline-none transition focus:border-orange-400 bg-white ${
-                      fieldErrors[field.name] ? "border-red-400" : "border-black/10"
+                    className={`rounded-2xl border-2 px-4 py-3 text-zinc-950 outline-none transition focus:border-orange-400 bg-white ${
+                      fieldErrors[field.name] ? "border-red-500" : "border-black/10"
                     }`}
                   />
                 )}
@@ -208,7 +208,7 @@ export function ProductForm({ mode, productId }: Readonly<ProductFormProps>) {
             </button>
             <Link
               href="/products"
-              className="rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-medium text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950"
+              className="rounded-full border-2 border-black/10 bg-white px-5 py-3 text-sm font-medium text-zinc-700 transition hover:border-zinc-950 hover:text-zinc-950"
             >
               Back to products
             </Link>
