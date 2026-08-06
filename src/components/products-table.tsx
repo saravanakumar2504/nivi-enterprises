@@ -56,14 +56,14 @@ export function ProductsTable() {
   }, [products, query]);
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
+    <main className="flex h-full flex-col">
       <LoadingIndicator visible={loading} label="Loading products…" />
       {loadError && (
-        <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {loadError}
         </div>
       )}
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-orange-600">Products</p>
           <h2 className="mt-1 text-2xl font-semibold text-zinc-950">Inventory directory</h2>
@@ -84,10 +84,10 @@ export function ProductsTable() {
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-        <div className="overflow-x-auto">
+      <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-black/10 bg-white shadow-sm">
+        <div className="overflow-auto rounded-2xl">
           <table className="min-w-full text-left text-sm">
-            <thead className="bg-stone-50 text-zinc-500">
+            <thead className="sticky top-0 z-10 bg-stone-50 text-zinc-500">
               <tr>
                 <th className="px-5 py-3 font-medium">Name</th>
                 <th className="px-5 py-3 font-medium">Brand</th>
