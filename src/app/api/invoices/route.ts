@@ -5,11 +5,27 @@ import type { CreateInvoiceInput, Invoice, InvoiceLine, Product } from "@/lib/ty
 
 const DB_NAME = "nivi-enterprises";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const startDateStr = url.searchParams.get("startDate");
+    const endDateStr = url.searchParams.get("endDate");
+
+    const filter: Record<string, unknown> = {};
+
+    if (startDateStr && endDateStr) {
+      const startDate = new Date(startDateStr);
+      const endDate = new Date(endDateStr);
+
+      filter.createdAt = {
+        $gte: startDate.toISOString(),
+        $lte: endDate.toISOString(),
+      };
+    }
+
     const client = await clientPromise;
     const docs = await client.db(DB_NAME).collection("invoices")
-      .find({}, { projection: { _id: 0 } })
+      .find(filter, { projection: { _id: 0 } })
       .sort({ createdAt: -1 })
       .toArray();
     return NextResponse.json(docs);
