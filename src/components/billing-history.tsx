@@ -28,8 +28,14 @@ export function BillingHistory() {
 
   const loadInvoices = (start?: string, end?: string) => {
     const params = new URLSearchParams();
-    if (start) params.append("startDate", start);
-    if (end) params.append("endDate", end);
+    if (start) {
+      // Convert date string to ISO timestamp at start of day (UTC)
+      params.append("startDate", `${start}T00:00:00.000Z`);
+    }
+    if (end) {
+      // Convert date string to ISO timestamp at end of day (UTC)
+      params.append("endDate", `${end}T23:59:59.999Z`);
+    }
 
     const url = `/api/invoices${params.toString() ? `?${params.toString()}` : ""}`;
 
@@ -99,9 +105,9 @@ export function BillingHistory() {
           }
           .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             border-bottom: 2px solid #333;
-            padding-bottom: 20px;
+            padding-bottom: 0px;
           }
           .company-name {
             font-size: 28px;
@@ -109,11 +115,19 @@ export function BillingHistory() {
             color: #333;
             margin: 0;
           }
+          .company-name-2 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+          }
           .company-info {
-            margin-top: 10px;
+            margin-top: 0px;
             font-size: 12px;
             color: #666;
             line-height: 1.6;
+            margin-bottom: 10px;
+
           }
           .customer-section {
             margin-bottom: 30px;
@@ -189,10 +203,10 @@ export function BillingHistory() {
       <body>
         <div class="invoice-container">
           <div class="header">
-            <h1 class="company-name">Nivi Enterprises</h1>
+            <div class="company-name">NIVI ENTERPRISES</div>
+            <div class="company-name-2">Electrical, Hardwares and RO Systems.</div>
             <div class="company-info">
-              <div>Phone: 1234567890</div>
-              <div>Address: AISHWARYAM TOWER, 1/74A, PN Rd,<br/>Ayyampalayam, Tiruppur, Tamil Nadu 641666</div>
+              <div>AISHWARYAM TOWER, 1/74A, PN Rd,<br/>Ayyampalayam, Tiruppur, Tamil Nadu 641666</div>
             </div>
           </div>
 

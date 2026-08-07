@@ -191,9 +191,9 @@ export function BillCreator() {
           }
           .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             border-bottom: 2px solid #333;
-            padding-bottom: 20px;
+            padding-bottom: 0px;
           }
           .company-name {
             font-size: 28px;
@@ -201,11 +201,20 @@ export function BillCreator() {
             color: #333;
             margin: 0;
           }
+          .company-name-2 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+
+          }
           .company-info {
-            margin-top: 10px;
+            margin-top: 0px;
             font-size: 12px;
             color: #666;
             line-height: 1.6;
+            margin-bottom: 10px;
+
           }
           .customer-section {
             margin-bottom: 30px;
@@ -281,10 +290,10 @@ export function BillCreator() {
       <body>
         <div class="invoice-container">
           <div class="header">
-            <h1 class="company-name">Nivi Enterprises</h1>
+            <div class="company-name">NIVI ENTERPRISES</div>
+            <div class="company-name-2">Electrical, Hardwares and RO Systems.</div>
             <div class="company-info">
-              <div>Phone: 095005 54203</div>
-              <div>Address: AISHWARYAM TOWER, 1/74A, PN Rd,<br/>Ayyampalayam, Tiruppur, Tamil Nadu 641666</div>
+              <div> AISHWARYAM TOWER, 1/74A, PN Rd,<br/>Ayyampalayam, Tiruppur, Tamil Nadu 641666</div>
             </div>
           </div>
 

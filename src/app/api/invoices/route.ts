@@ -14,12 +14,10 @@ export async function GET(request: Request) {
     const filter: Record<string, unknown> = {};
 
     if (startDateStr && endDateStr) {
-      const startDate = new Date(startDateStr);
-      const endDate = new Date(endDateStr);
-
+      // startDateStr and endDateStr are already in ISO format (e.g., "2026-08-07T00:00:00.000Z")
       filter.createdAt = {
-        $gte: startDate.toISOString(),
-        $lte: endDate.toISOString(),
+        $gte: startDateStr,
+        $lte: endDateStr,
       };
     }
 
